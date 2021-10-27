@@ -22,7 +22,7 @@ jobs:
 
       - run:
           name: Docker restart
-          command: bash ~/script.sh
+          command: bash ../script.sh
 
 workflows:
   version: 2

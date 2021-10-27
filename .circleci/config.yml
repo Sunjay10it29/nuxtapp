@@ -22,8 +22,7 @@ jobs:
 
       - run:
           name: Docker restart
-          command: yarn build
-
+          command: docker-compose build
 
 workflows:
   version: 2

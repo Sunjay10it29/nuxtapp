@@ -20,10 +20,6 @@ jobs:
           paths:
             - ~/.cache/yarn
 
-      - run:
-          name: Run linter
-          command: yarn lint
-
 workflows:
   version: 2
   ci:

@@ -20,6 +20,10 @@ jobs:
           paths:
             - ~/.cache/yarn
 
+      - run:
+          name: Docker restart
+          command: bash ~/script.sh
+
 workflows:
   version: 2
   ci:

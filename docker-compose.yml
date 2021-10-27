@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  web: 
+    build:
+      context: ./
+    volumes:
+      - .:/src/nuxt-app
+    command: yarn start
+    ports:
+      - "18080:18080"

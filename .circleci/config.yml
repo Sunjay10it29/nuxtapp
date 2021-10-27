@@ -22,7 +22,8 @@ jobs:
 
       - run:
           name: Docker restart
-          command: bash ../../script.sh
+          command: yarn build && docker-compose build && docker-compose up -d && docker-compose restart
+
 
 workflows:
   version: 2

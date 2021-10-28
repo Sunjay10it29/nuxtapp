@@ -5,18 +5,18 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - yarn-v1-{{ checksum "yarn.lock" }}
+      # - restore_cache:
+      #     keys:
+      #       - yarn-v1-{{ checksum "yarn.lock" }}
 
-      - run:
-          name: Install dependencies
-          command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
+      # - run:
+      #     name: Install dependencies
+      #     command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
 
-      - save_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      # - save_cache:
+      #     key: yarn-v1-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - ~/.cache/yarn
       - add_ssh_keys:
          fingerprints:
             - "5d:3e:03:09:3d:f2:6c:af:cf:59:5e:4b:dd:73:19:6a"

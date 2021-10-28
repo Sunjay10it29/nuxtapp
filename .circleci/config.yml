@@ -3,12 +3,14 @@ version: 2
 jobs:
   ci:
     docker:
-      - image: cimg/node:16.12.0-alpine3.11
+      - image: cimg/node:lts
+    working_directory: ~/src/nuxt-app
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
-
+      - attach_workspace:
+          at: ~/src/nuxt-app
       - restore_cache:
           keys:
             - yarn-v1-{{ checksum "yarn.lock" }}
@@ -21,6 +23,11 @@ jobs:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+
+      - run:
+          name: Yarn build
+          command: yarn build
+
       - run:
           command: |
             docker-compose build
@@ -28,12 +35,8 @@ jobs:
       - run:
           command: |
             docker-compose up -d
-
       - run:
           command: |
-            docker-compose restart
-      - run:
-           command: |
             docker-compose ps
 
 workflows:

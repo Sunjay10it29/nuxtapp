@@ -1,14 +1,35 @@
-version: 2
-
 jobs:
   ci:
     docker:
       - image: cimg/node:lts
     steps:
       - checkout
+
+      - restore_cache:
+          keys:
+            - yarn-v1-{{ checksum "yarn.lock" }}
+
       - run:
-          name: install-dependencies
-          command: yarn install
+          name: Install dependencies
+          command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
+
+      - save_cache:
+          key: yarn-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
       - deploy:
           name: axiome-NAS
           command: ssh -o "StrictHostKeyChecking no" sunjay@192.168.1.112 "cd ~/testproduction/nuxtapp; git pull origin master; yarn install; yarn start"
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - ci:
+          filters:
+            branches:
+              only:
+                - main
+                - master
+                - developer

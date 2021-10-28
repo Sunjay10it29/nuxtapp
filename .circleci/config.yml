@@ -4,13 +4,13 @@ jobs:
   ci:
     docker:
       - image: cimg/node:lts
-    working_directory: ~/src/nuxt-app
+    working_directory: /home/sunny/testingProduction/nuxtapp
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
       - attach_workspace:
-          at: /home/sunny/testingProduction/nuxtapp
+          at: ~/src/nuxt-app
       - restore_cache:
           keys:
             - yarn-v1-{{ checksum "yarn.lock" }}

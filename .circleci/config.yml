@@ -10,7 +10,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
       - attach_workspace:
-          at: ~/src/nuxt-app
+          at: /home/sunny/testingProduction/nuxtapp
       - restore_cache:
           keys:
             - yarn-v1-{{ checksum "yarn.lock" }}

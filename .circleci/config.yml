@@ -21,8 +21,12 @@ jobs:
             - ~/.cache/yarn
 
       - run:
-          name: Docker restart
-          command: docker-compose build
+          name: Yarn build
+          command: yarn build
+          
+      - run:
+          command: |
+            docker-compose build
 
 workflows:
   version: 2

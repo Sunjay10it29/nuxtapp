@@ -1,4 +1,9 @@
 export default {
+  // Host and port: https://nuxtjs.org/docs/features/configuration
+  server: {
+    port: process.env.NODE_ENV === 'production' ? 9002 : 3000,
+    host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost',
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'my_app',

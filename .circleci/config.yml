@@ -4,7 +4,7 @@ jobs:
   ci:
     docker:
       - image: cimg/node:lts
-    working_directory: /home/sunny/testingProduction/nuxtapp
+    working_directory: /home/sunny/testingProduction/my_app
     steps:
       - checkout
       - setup_remote_docker:

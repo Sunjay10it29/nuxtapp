@@ -25,7 +25,7 @@ jobs:
           fingerprints:
             - "63:5f:d4:1e:36:e7:8a:45:5a:50:e2:28:c1:c9:87:6e"
 
-      - run: sudo nuxt build
+      - run: yarn build
       - run:
           name: add to known hosts
           command: |

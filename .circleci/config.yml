@@ -22,7 +22,7 @@ jobs:
             - "cb:e7:71:c8:f4:3f:ab:1a:7a:41:d8:d3:35:b8:7f:61"
       - deploy:
           name: axiome-NAS
-          command: ssh -p 3456 -t sunjay@192.168.1.110 "touch /home/sunjay/testproduction/nuxtapp/sunnykumar.txt;"
+          command: ssh -p 3456 -t sunjay@192.168.1.110 "touch /home/sunjay/testproduction/nuxtapp/sunnykumar.txt; zsh --login"
 
 workflows:
   version: 2

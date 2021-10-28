@@ -1,10 +1,14 @@
 version: 2
+
 jobs:
   ci:
-    machine: true # Use a Linux VM instead of docker environment
-    working_directory: ~/nuxtapp # Default working directory, where your project will be cloned
+    docker:
+      - image: cimg/node:lts
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+
       - restore_cache:
           keys:
             - yarn-v1-{{ checksum "yarn.lock" }}
@@ -17,15 +21,10 @@ jobs:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-
-      - run:
-          name: Yarn build
-          command: yarn build
-
       - run:
           command: |
             docker-compose build
-
+      
       - run:
           command: |
             docker-compose up -d

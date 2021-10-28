@@ -5,41 +5,42 @@ jobs:
     docker:
       - image: cimg/node:lts
     steps:
-      - type: shell
-      # Update environment
-      - run: sudo apt update
-      - run: sudo apt-get install rsync
+      - checkout
 
-      # Sync the SSH keys
-      # - run:
-      # name: skip key authentication message
-      # command: |
-      #   sudo cat ~/.ssh/config
-      #   sudo chmod 400 ~/.ssh/config
-      #   echo "PubkeyAuthentication yes" >> ~/.ssh/config
-      #   echo "StrictHostKeyChecking no" >> ~/.ssh/config
-      #   service sshd restart
+      - restore_cache:
+          keys: 
+            - yarn-v1-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install dependencies
+          command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn 
+      
+      - save_cache:
+          key: yarn-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
 
       - add_ssh_keys:
           fingerprints:
             - "63:5f:d4:1e:36:e7:8a:45:5a:50:e2:28:c1:c9:87:6e"
 
-      # Check out the code in the project directory
-      - checkout
-
-      # Install JS dependencies
-      # - run: yarn install --no-progress --non-interactive --silent --pure-lockfile
-      - run: npm ci
-      - run: sudo npm install nuxt -g --loglevel=error
-
-      # Run build command
       - run: sudo nuxt build
-
-      # Add the server to known hosts
       - run:
           name: add to known hosts
           command: |
             sudo ssh-keyscan -H -p 3456 192.168.1.110 >> ~/.ssh/known_hosts
+            sudo rsync -avce ssh -p 3456 --delete ./dist/ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sunjay@192.168.1.110:/home/sunjay/testproduction/nuxtapp
 
-      # Upload files to server.
-      - run: sudo rsync -avce ssh --delete ./dist/ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sunjay@192.168.1.110:/home/sunjay/testproduction/nuxtapp
+     
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - ci:
+          filters:
+            branches:
+              only:
+                - main
+                - master
+                - developer

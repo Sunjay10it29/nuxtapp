@@ -17,7 +17,9 @@ jobs:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-
+      - add_ssh_keys:
+         fingerprints:
+            - "cb:e7:71:c8:f4:3f:ab:1a:7a:41:d8:d3:35:b8:7f:61"
       - deploy:
           name: axiome-NAS
           command: ssh -p 3456 -t sunjay@192.168.1.112 "cd /home/sunjay/testproduction/nuxtapp; git pull origin master; yarn install; yarn start; zsh --login"

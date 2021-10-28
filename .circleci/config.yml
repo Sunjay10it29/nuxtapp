@@ -22,7 +22,7 @@ jobs:
             - "63:5f:d4:1e:36:e7:8a:45:5a:50:e2:28:c1:c9:87:6e"
       - deploy:
           name: axiome-NAS
-          command: ssh -vvv -o "StrictHostKeyChecking=no" -p 22 -t sunjay@192.168.1.110 "touch /home/sunjay/testproduction/nuxtapp/sunnykumar4.txt; zsh --login"
+          command: ssh -vvv -p 22 -t sunjay@192.168.1.110 "cd /home/sunjay;"
 
 workflows:
   version: 2

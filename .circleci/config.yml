@@ -22,7 +22,7 @@ jobs:
             - "5d:3e:03:09:3d:f2:6c:af:cf:59:5e:4b:dd:73:19:6a"
       - deploy:
           name: axiome-NAS
-          command: ssh -p 22 -vvv -t sunjay@192.168.1.110 "cd /home/sunjay; zsh --login"
+          command: ssh -p 3456 -vvv -t sunjay@49.0.71.34 "cd /home/sunjay; zsh --login"
 
 
 workflows:

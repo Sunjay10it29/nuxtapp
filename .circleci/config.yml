@@ -28,9 +28,7 @@ jobs:
       - run: yarn build
       - run:
           name: add to known hosts
-          command: |
-            sudo ssh-keyscan -H -p 3456 192.168.1.110 >> ~/.ssh/known_hosts
-            sudo rsync -avce ssh -p 3456 --delete ./dist/ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sunjay@192.168.1.110:/home/sunjay/testproduction/nuxtapp
+          command: ssh -p 3456 -o StrictHostKeyChecking=no -o sunjay@192.168.1.110:/home/sunjay/testproduction/nuxtapp
 
      
 workflows:

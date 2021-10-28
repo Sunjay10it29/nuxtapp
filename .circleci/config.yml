@@ -1,52 +1,13 @@
 version: 2
-
 jobs:
-  ci:
-    docker:
-      - image: cimg/node:lts
-    working_directory:  ~/src/nuxt-app
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: false
-      - attach_workspace:
-          at: ~/src/nuxt-app
-      - restore_cache:
-          keys:
-            - yarn-v1-{{ checksum "yarn.lock" }}
-
-      - run:
-          name: Install dependencies
-          command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
-
-      - save_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-
-      - run:
-          name: Yarn build
-          command: yarn build
-
-      - run:
-          command: |
-            docker-compose build
-      
-      - run:
-          command: |
-            docker-compose up -d
-      - run:
-          command: |
-            docker-compose ps
-
-workflows:
-  version: 2
-  ci:
-    jobs:
-      - ci:
-          filters:
-            branches:
-              only:
-                - main
-                - master
-                - developer
+    build:
+        docker:
+            - image: circleci/node:7
+        steps:
+            - checkout
+            - run:
+                name: install-dependencies
+                command: yarn install
+            - deploy:
+                name: axiome-NAS
+                command: ssh -o "StrictHostKeyChecking no" sunjay@192.168.1.112 "cd ~/testproduction/nuxtapp; git pull origin master; yarn install; yarn start"

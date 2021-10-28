@@ -1,13 +1,14 @@
 version: 2
+
 jobs:
-    build:
-        docker:
-            - image: circleci/node:7
-        steps:
-            - checkout
-            - run:
-                name: install-dependencies
-                command: yarn install
-            - deploy:
-                name: axiome-NAS
-                command: ssh -o "StrictHostKeyChecking no" sunjay@192.168.1.112 "cd ~/testproduction/nuxtapp; git pull origin master; yarn install; yarn start"
+  ci:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: yarn install
+      - deploy:
+          name: axiome-NAS
+          command: ssh -o "StrictHostKeyChecking no" sunjay@192.168.1.112 "cd ~/testproduction/nuxtapp; git pull origin master; yarn install; yarn start"

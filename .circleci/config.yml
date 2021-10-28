@@ -32,6 +32,9 @@ jobs:
       - run:
           command: |
             docker-compose restart
+      - run:
+           command: |
+            docker-compose ps
 
 workflows:
   version: 2

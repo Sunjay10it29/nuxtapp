@@ -19,7 +19,7 @@ jobs:
             - ~/.cache/yarn
       - add_ssh_keys:
          fingerprints:
-            - "9d:53:7f:ca:ff:c7:38:8f:c5:95:42:4a:bb:af:42:af"
+            - "5d:3e:03:09:3d:f2:6c:af:cf:59:5e:4b:dd:73:19:6a"
       - deploy:
           name: axiome-NAS
           command: ssh -vvv -p 22 -t sunjay@192.168.1.110 "cd /home/sunjay;"

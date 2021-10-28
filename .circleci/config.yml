@@ -24,7 +24,7 @@ jobs:
           name: axiome-NAS
 
           command: |
-            sudo ssh-keyscan -H -p 3456 49.0.71.34 >> ~/.ssh/known_hosts
+            sudo ssh-keyscan -vvv -H -p 3456 49.0.71.34 >> ~/.ssh/known_hosts
             ssh -p 3456 -vvv -t sunjay@49.0.71.34 "cd /home/sunjay; zsh --login"
 
 

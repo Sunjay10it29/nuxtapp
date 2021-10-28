@@ -20,11 +20,9 @@ jobs:
       - add_ssh_keys:
          fingerprints:
             - "9d:53:7f:ca:ff:c7:38:8f:c5:95:42:4a:bb:af:42:af"
-      - run:
-          name: add to known hosts
-          command: |
-            sudo ssh-keyscan -H -p 22 192.168.1.110 >> ~/.ssh/known_hosts
-            sudo echo "192.168.1.110 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIS7N6RGFZlmqTjQ2wYAKxSIN3QDBm41Mj6FQxUuFtwB sunnythai786@gmail.com" >> ~/.ssh/known_hosts
+      - deploy:
+          name: axiome-NAS
+          command: ssh -vvv -p 22 -t sunjay@192.168.1.110 "cd /home/sunjay;"
 
 workflows:
   version: 2

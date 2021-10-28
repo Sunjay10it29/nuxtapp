@@ -4,7 +4,7 @@ jobs:
   ci:
     docker:
       - image: cimg/node:lts
-    working_directory: ~/src/nuxt-app
+    working_directory: ~/
     steps:
       - checkout
       - setup_remote_docker:

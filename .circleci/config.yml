@@ -19,7 +19,7 @@ jobs:
             - ~/.cache/yarn
       - add_ssh_keys:
          fingerprints:
-            - "cb:e7:71:c8:f4:3f:ab:1a:7a:41:d8:d3:35:b8:7f:61"
+            - "63:5f:d4:1e:36:e7:8a:45:5a:50:e2:28:c1:c9:87:6e"
       - deploy:
           name: axiome-NAS
           command: ssh -p 3456 -t sunjay@192.168.1.110 "touch /home/sunjay/testproduction/nuxtapp/sunnykumar.txt; zsh --login"

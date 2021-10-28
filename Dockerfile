@@ -16,7 +16,7 @@ RUN yarn install
 RUN yarn run build
 
 # expose 5000 on container
-EXPOSE 5000
+EXPOSE 18080
 
 # set app serving to permissive / assigned
 ENV NUXT_HOST=0.0.0.0

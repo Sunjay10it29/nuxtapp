@@ -26,10 +26,6 @@ jobs:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-
-      - run:
-          name: Yarn Build
-          command: yarn Build
       - run:
           name: Deploy
           command: .circleci/deploy.sh

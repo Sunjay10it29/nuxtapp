@@ -29,11 +29,15 @@ jobs:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      
+      - run:
+          name: Run linter
+          command: yarn lint
 
       - run:
           name: Deploy
           command: .circleci/deploy.sh
-
+          
 workflows:
   version: 2
   ci:

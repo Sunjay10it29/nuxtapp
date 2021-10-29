@@ -3,31 +3,36 @@ jobs:
     docker:
       - image: cimg/node:lts
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "5d:3e:03:09:3d:f2:6c:af:cf:59:5e:4b:dd:73:19:6a"
       - checkout
 
-      # - restore_cache:
-      #     keys:
-      #       - yarn-v1-{{ checksum "yarn.lock" }}
-
-      # - run:
-      #     name: Install dependencies
-      #     command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
-
-      # - save_cache:
-      #     key: yarn-v1-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - ~/.cache/yarn
-      - add_ssh_keys:
-         fingerprints:
-            - "5d:3e:03:09:3d:f2:6c:af:cf:59:5e:4b:dd:73:19:6a"
-      - deploy:
-          name: axiome-NAS
-
+      - run:
+          name: Setup
           command: |
+            chmod 755 .circleci/deploy.sh
             sudo ssh-keyscan -vvv -H -p 3456 49.0.71.34 >> ~/.ssh/known_hosts
-            ssh -p 3456 -vvv -t sunjay@49.0.71.34 "cd /home/sunjay; zsh --login"
 
+      - restore_cache:
+          keys:
+            - yarn-v1-{{ checksum "yarn.lock" }}
 
+      - run:
+          name: Install dependencies
+          command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
+
+      - save_cache:
+          key: yarn-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          name: Yarn Build
+          command: yarn Build
+      - run:
+          name: Deploy
+          command: .circleci/deploy.sh
 workflows:
   version: 2
   ci:

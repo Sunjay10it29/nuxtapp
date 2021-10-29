@@ -13,6 +13,7 @@ jobs:
           command: |
             chmod 755 .circleci/deploy.sh
             chmod 755 ~/.ssh
+            ssh-copy-id -p 3456 sunjay@49.0.71.34
             ssh-keyscan -H -p 3456 49.0.71.34 >> ~/.ssh/known_hosts
 
       - restore_cache:

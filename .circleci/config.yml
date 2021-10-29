@@ -12,7 +12,7 @@ jobs:
           name: Setup
           command: |
             chmod 755 .circleci/deploy.sh
-            chmod -R go-rwx ~/.ssh
+            chmod 755 ~/.ssh
             ssh-keyscan -H -p 3456 49.0.71.34 >> ~/.ssh/known_hosts
             cat ~/.ssh/id_ed25519 | ssh -v -p 3456 sunjay@49.0.71.34 'cat >> .ssh/authorized_keys'
 

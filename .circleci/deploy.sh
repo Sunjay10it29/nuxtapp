@@ -2,8 +2,6 @@
 
 set -e
 
-rm -rf .git
-rm -rf .gitignore
 git config --global user.email "sunnythai786@gmail.com"
 git config --global user.name "sunjay"
 git add .

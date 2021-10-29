@@ -10,4 +10,4 @@ git config --global user.name "sunjay"
 # git push --force production master
 # ssh-keyscan -H -p 3456 49.0.71.34 >> ~/.ssh/known_hosts
 # cat ~/.ssh/id_ed25519 | ssh -vvv -p 3456 sunjay@49.0.71.34 'cat >> .ssh/authorized_keys'
-ssh -vvv -o StrictHostKeyChecking=no -p 3456 sunjay@49.0.71.34 "cd /home/sunjay/testproduction/nuxtapp/; pwd; yarn install; git pull origin master; exit" 
+ssh -vvv -oHostKeyAlgorithms=+ssh-dss -o StrictHostKeyChecking=no -p 3456 sunjay@49.0.71.34 "cd /home/sunjay/testproduction/nuxtapp/; pwd; yarn install; git pull origin master; exit" 
